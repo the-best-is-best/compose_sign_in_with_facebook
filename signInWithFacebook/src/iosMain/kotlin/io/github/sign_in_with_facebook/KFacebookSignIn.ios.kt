@@ -11,7 +11,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import cocoapods.FBSDKCoreKit.FBSDKGraphRequest
-import cocoapods.FBSDKCoreKit.FBSDKGraphRequestConnectingProtocol
 import cocoapods.FBSDKLoginKit.FBSDKAccessToken
 import cocoapods.FBSDKLoginKit.FBSDKLoginManager
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -33,12 +32,14 @@ actual class KFacebookSignIn actual constructor() {
                 return@suspendCancellableCoroutine
             }
 
-            val request = FBSDKGraphRequest(graphPath = "me")
-            request.startWithCompletion { connection: FBSDKGraphRequestConnectingProtocol?, result: Any?, error: NSError? ->
-                connection?.start()
+            val request = FBSDKGraphRequest(
+                graphPath = "me",
+                parameters = mapOf("fields" to "id,name,email,picture")
+            )
+            request.startWithCompletion { _, result, error ->
                 if (error != null) {
                     continuation.resume(Result.failure(error.toException()))
-                } else if (result != null && result is Map<*, *>) {
+                } else if (result is Map<*, *>) {
                     val userId = result["id"] as? String
                     val name = result["name"] as? String
                     val email = result["email"] as? String
@@ -60,10 +61,9 @@ actual class KFacebookSignIn actual constructor() {
                 } else {
                     continuation.resume(Result.failure(Exception("Unknown error occurred")))
                 }
-
             }
+        }
 
-    }
 
     actual fun isSignIn(): Boolean {
         val accessToken = FBSDKAccessToken.currentAccessToken()

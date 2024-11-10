@@ -38,15 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     func applicationDidBecomeActive(_ application: UIApplication) {
         if #available(iOS 14, *) {
-            ATTrackingManager.requestTrackingAuthorization { status in
-                switch status {
-                    case .authorized:
-                        print("enable tracking")
-                    case .denied:
-                        print("disable tracking")
-                    default:
-                        print("disable tracking")
-                }
+            ATTrackingManager.requestTrackingAuthorization { _ in
+                
             }
         }
     }

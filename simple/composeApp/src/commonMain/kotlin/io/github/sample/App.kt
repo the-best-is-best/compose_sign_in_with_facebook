@@ -78,7 +78,7 @@ internal fun App() = AppTheme {
             scope.launch {
                 val userData = faceBookSignIn.getUserData()
                 userData.onSuccess {
-                    println("user email ${it.email}")
+                    println("user photo ${it.pictureUrl}")
                 }
                 userData.onFailure {
                     println("error get user data $it")
