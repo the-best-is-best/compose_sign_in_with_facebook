@@ -1,0 +1,39 @@
+[versions]
+facebookLogin = "17.0.2"
+kotlin = "2.0.21"
+compose = "1.7.0"
+agp = "8.7.1"
+androidx-activityCompose = "1.9.3"
+androidx-uiTest = "1.7.5"
+maven-publish = "0.29.0"
+kotlinxCoroutinesCore = "1.9.0"
+google-services = "4.4.2"
+firebaseAuth = "2.1.0"
+kfirebase = "1.0.1"
+fragmentKtx = "1.8.4"
+
+
+
+
+[libraries]
+
+androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+androidx-uitest-testManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "androidx-uiTest" }
+androidx-uitest-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "androidx-uiTest" }
+facebook-login = { module = "com.facebook.android:facebook-login", version.ref = "facebookLogin" }
+facebook-core = { module = "com.facebook.android:facebook-core", version.ref = "facebookLogin" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+kfirebase-analytics = { module = "io.github.the-best-is-best:kfirebase-analytics", version.ref = "kfirebase" }
+kfirebase-core = { module = "io.github.the-best-is-best:kfirebase-core", version.ref = "kfirebase" }
+firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebaseAuth" }
+androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx" }
+
+[plugins]
+
+multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+compose = { id = "org.jetbrains.compose", version.ref = "compose" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
+google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
