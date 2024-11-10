@@ -77,7 +77,6 @@ actual class KFacebookSignIn {
     actual fun isSignIn(): Boolean {
         val accessToken = AccessToken.getCurrentAccessToken()
         val isExpired = accessToken?.isExpired ?: true
-        println("is sign in: $isExpired")
         return !isExpired
     }
 
