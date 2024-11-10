@@ -11,3 +11,19 @@ actual fun SignInButton(
     config: SignInButtonConfig
 ) {
 }
+
+actual class KFacebookSignIn actual constructor() {
+
+    actual suspend fun getUserData(): Result<FacebookUser> {
+        TODO("Not yet implemented")
+    }
+
+    actual fun isSignIn(): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    actual fun signOut() {
+    }
+
+
+}

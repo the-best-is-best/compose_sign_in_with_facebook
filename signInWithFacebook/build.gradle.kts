@@ -14,6 +14,8 @@ plugins {
     id("maven-publish")
     id("signing")
     alias(libs.plugins.maven.publish)
+    alias(libs.plugins.native.cocoapods)
+
 }
 
 
@@ -130,7 +132,33 @@ kotlin {
             isStatic = true
         }
     }
+    cocoapods {
+        version = "1.0"
+        summary = "Some description for a Kotlin/Native module"
+        homepage = "Link to a Kotlin/Native module homepage"
 
+        // Optional properties
+        // Configure the Pod name here instead of changing the Gradle project name
+        name = "signInWithFacebook"
+
+        framework {
+            baseName = "signInWithFacebook"
+        }
+        noPodspec()
+        ios.deploymentTarget = "12.0"
+        pod("FBSDKLoginKit") {
+            version = "17.4.0"
+            extraOpts += listOf("-compiler-option", "-fmodules")
+
+        }
+        pod("FBSDKCoreKit") {
+            version = "17.4.0"
+            extraOpts += listOf("-compiler-option", "-fmodules")
+
+        }
+
+
+    }
     sourceSets {
         all {
             languageSettings.apply {

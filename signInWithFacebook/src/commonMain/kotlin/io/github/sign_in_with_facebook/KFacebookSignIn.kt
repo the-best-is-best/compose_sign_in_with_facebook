@@ -14,14 +14,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 
 expect class KFacebookSignIn() {
-//    fun getCredential(
-//        scopes: List<String>,
-//        onSignInFailed: (Exception) -> Unit,
-//        onSignedIn: (String?) -> Unit
-//    )
 
     suspend fun getUserData(): Result<FacebookUser>
     fun isSignIn(): Boolean
+    fun getAccessToken(): String?
     fun signOut()
 
 

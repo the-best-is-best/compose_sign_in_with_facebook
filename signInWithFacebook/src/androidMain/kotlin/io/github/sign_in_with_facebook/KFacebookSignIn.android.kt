@@ -32,7 +32,7 @@ actual class KFacebookSignIn {
     // Fetch user data from Facebook
     actual suspend fun getUserData(): Result<FacebookUser> =
         suspendCancellableCoroutine { continuation ->
-            if (isSignIn()) {
+            if (!isSignIn()) {
                 continuation.resume(Result.failure(Exception("Get Credential first")))
                 return@suspendCancellableCoroutine // Fail if loginResult is null
             }
@@ -75,7 +75,17 @@ actual class KFacebookSignIn {
     }
 
     actual fun isSignIn(): Boolean {
-        return AccessToken.getCurrentAccessToken()?.isExpired != false
+        val accessToken = AccessToken.getCurrentAccessToken()
+        val isExpired = accessToken?.isExpired ?: true  // Default to true if null
+        println("is sign in: $isExpired")
+        return !isExpired  // Return true if not expired
+    }
+
+    actual fun getAccessToken(): String? {
+        if (!isSignIn()) {
+            return null
+        }
+        return AccessToken.getCurrentAccessToken()?.token
     }
 
 }

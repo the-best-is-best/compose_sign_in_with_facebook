@@ -16,6 +16,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import dev.gitlive.firebase.Firebase
+import dev.gitlive.firebase.auth.FacebookAuthProvider
+import dev.gitlive.firebase.auth.auth
 import io.github.sample.theme.AppTheme
 import io.github.sign_in_with_facebook.KFacebookSignIn
 import io.github.sign_in_with_facebook.SignInButton
@@ -26,6 +29,7 @@ import signinwithfacebookicon.Facebook
 @Composable
 internal fun App() = AppTheme {
     val faceBookSignIn = KFacebookSignIn()
+
     val scope = rememberCoroutineScope()
     Column(
         modifier = Modifier
@@ -42,7 +46,15 @@ internal fun App() = AppTheme {
 
             },
             onSignedIn = {
-                println("sign in success")
+                scope.launch {
+                    if (it != null) {
+                        Firebase.auth.signInWithCredential(
+                            FacebookAuthProvider.credential(
+                                accessToken = it
+                            )
+                        )
+                    }
+                }
             },
             config = SignInButtonConfig(
                 buttonText = "Sign in with Facebook",
@@ -54,6 +66,13 @@ internal fun App() = AppTheme {
 
                 )
         )
+//                println("facebook access token ${faceBookSignIn.getAccessToken()}")
+        Button(onClick = {
+            println("facebook access token ${faceBookSignIn.getAccessToken()}")
+
+        }) {
+            Text("Get last access token")
+        }
         Button(onClick = {
             scope.launch {
                 val userData = faceBookSignIn.getUserData()

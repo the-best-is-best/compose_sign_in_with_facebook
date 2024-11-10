@@ -37,3 +37,4 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
+native-cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
