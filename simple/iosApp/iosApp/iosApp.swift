@@ -2,6 +2,7 @@ import UIKit
 import ComposeApp
 import FirebaseCore
 import FBSDKCoreKit
+import AppTrackingTransparency
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -12,10 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         FirebaseApp.configure()
-        ApplicationDelegate.shared.application(
-                   application,
-                   didFinishLaunchingWithOptions: launchOptions
-               )
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+       
         window = UIWindow(frame: UIScreen.main.bounds)
         if let window = window {
             window.rootViewController = MainKt.MainViewController()
@@ -37,5 +36,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 annotation: options[UIApplication.OpenURLOptionsKey.annotation]
             )
         }
-
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        if #available(iOS 14, *) {
+            ATTrackingManager.requestTrackingAuthorization { status in
+                switch status {
+                    case .authorized:
+                        print("enable tracking")
+                    case .denied:
+                        print("disable tracking")
+                    default:
+                        print("disable tracking")
+                }
+            }
+        }
+    }
 }

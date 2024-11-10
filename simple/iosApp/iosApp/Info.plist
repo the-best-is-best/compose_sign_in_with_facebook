@@ -30,5 +30,9 @@
     <!-- Add the FacebookClientToken key -->
     <key>FacebookClientToken</key>
     <string>3d8f007b006f6689e0b1d7b538c819c0</string>
+    
+    <key>NSUserTrackingUsageDescription</key>
+    <string>This identifier will be used to deliver personalized ads to you.</string>
+
 </dict>
 </plist>
