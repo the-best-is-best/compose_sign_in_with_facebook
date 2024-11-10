@@ -46,6 +46,7 @@ internal fun App() = AppTheme {
 
             },
             onSignedIn = {
+                println("sign in success $it")
                 scope.launch {
                     if (it != null) {
                         Firebase.auth.signInWithCredential(
@@ -80,7 +81,7 @@ internal fun App() = AppTheme {
                     println("user email ${it.email}")
                 }
                 userData.onFailure {
-
+                    println("error get user data $it")
                 }
             }
         }) {
@@ -93,7 +94,7 @@ internal fun App() = AppTheme {
                 // Firebase.auth.signOut()
             }
         }) {
-            Text("Logut")
+            Text("Logout")
         }
     }
 }

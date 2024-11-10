@@ -1,0 +1,5 @@
+<string>APP-ID</string>
+<key>FacebookClientToken</key>
+<string>CLIENT-TOKEN</string>
+<key>FacebookDisplayName</key>
+<string>APP-NAME</string>

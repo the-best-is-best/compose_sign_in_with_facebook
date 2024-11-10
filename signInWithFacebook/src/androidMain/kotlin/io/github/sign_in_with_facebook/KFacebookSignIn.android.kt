@@ -76,15 +76,12 @@ actual class KFacebookSignIn {
 
     actual fun isSignIn(): Boolean {
         val accessToken = AccessToken.getCurrentAccessToken()
-        val isExpired = accessToken?.isExpired ?: true  // Default to true if null
+        val isExpired = accessToken?.isExpired ?: true
         println("is sign in: $isExpired")
-        return !isExpired  // Return true if not expired
+        return !isExpired
     }
 
     actual fun getAccessToken(): String? {
-        if (!isSignIn()) {
-            return null
-        }
         return AccessToken.getCurrentAccessToken()?.token
     }
 
@@ -118,8 +115,7 @@ actual fun SignInButton(
 
             override fun onSuccess(result: LoginResult) {
                 scope.launch {
-                    val token = result.accessToken.token
-                    onSignedIn(token)
+                    onSignedIn(KFacebookSignIn().getAccessToken())
                 }
             }
         })

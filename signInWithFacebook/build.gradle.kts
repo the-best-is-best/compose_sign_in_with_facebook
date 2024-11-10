@@ -191,7 +191,7 @@ kotlin {
             implementation(compose.uiTooling)
             implementation(libs.androidx.activityCompose)
             implementation(libs.facebook.login)
-            implementation(libs.facebook.core)
+            //implementation(libs.facebook.core)
 
         }
 
