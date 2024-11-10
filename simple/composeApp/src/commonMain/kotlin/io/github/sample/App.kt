@@ -1,10 +1,12 @@
 package io.github.sample
 
+import SignInWithFacebookIcon
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -12,12 +14,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import dev.gitlive.firebase.Firebase
-import dev.gitlive.firebase.auth.auth
 import io.github.sample.theme.AppTheme
 import io.github.sign_in_with_facebook.KFacebookSignIn
+import io.github.sign_in_with_facebook.SignInButton
+import io.github.sign_in_with_facebook.SignInButtonConfig
 import kotlinx.coroutines.launch
+import signinwithfacebookicon.Facebook
 
 @Composable
 internal fun App() = AppTheme {
@@ -30,51 +34,44 @@ internal fun App() = AppTheme {
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        faceBookSignIn.SignInButton(listOf("email", "public_profile"), onSignInFailed = {
-            println("error is ${it}")
-        }, onSignedIn = {
-            println("login FB success")
-        })
-        Button(onClick = {
-            scope.launch {
-                faceBookSignIn.getCredential(listOf("email", "public_profile"), onSignInFailed = {
-                    println("error is ${it}")
 
-                }, onSignedIn = {
-                    println("login FB success")
+        SignInButton(
+            scopes = listOf("email", "public_profile"),
+            onSignInFailed = {
+                println("sign in error is ${it}")
 
-                })
+            },
+            onSignedIn = {
+                println("sign in success")
+            },
+            config = SignInButtonConfig(
+                buttonText = "Sign in with Facebook",
+                iconRes = SignInWithFacebookIcon.Facebook,
+                iconResModifier = Modifier.size(24.dp),
+                modifier = Modifier,
+                textColor = Color.Black,
 
-            }
-        }) {
-            Text("Sign in with FB")
-        }
+
+                )
+        )
         Button(onClick = {
             scope.launch {
                 val userData = faceBookSignIn.getUserData()
                 userData.onSuccess {
                     println("user email ${it.email}")
                 }
+                userData.onFailure {
+
+                }
             }
         }) {
             Text("Get user data")
         }
-//        Button(onClick = {
-//
-//            scope.launch {
-//               val cred  = googleSign.getStoredCredential()
-//                cred.onSuccess {
-//                    Firebase.auth.signInWithCredential(GoogleAuthProvider.credential(idToken = it.idToken, it.accessToken))
-//                    println("user is ${Firebase.auth.currentUser}")
-//                }
-//            }
-//        }){
-//            Text("get stored cred")
-//        }
+
         Button(onClick = {
             scope.launch {
-                // googleSign.signOut()
-                Firebase.auth.signOut()
+                faceBookSignIn.signOut()
+                // Firebase.auth.signOut()
             }
         }) {
             Text("Logut")
