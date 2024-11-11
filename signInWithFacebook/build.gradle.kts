@@ -41,19 +41,19 @@ tasks.withType<PublishToMavenRepository> {
 
 
 
-extra["groupId"] = "com.example"
-extra["artifactId"] = "your-artifact-id"
+extra["groupId"] = "io.github.the-best-is-best"
+extra["artifactId"] = "compose-facebook-sigin-in"
 extra["version"] = "1.0.0"
-extra["packageName"] = ""
-extra["packageUrl"] = ""
-extra["packageDescription"] = ""
+extra["packageName"] = "ComposeSignWithFacebook"
+extra["packageUrl"] = "https://github.com/the-best-is-best/compose_sign_in_with_facebook"
+extra["packageDescription"] = "The ComposeSignWithFacebook package for Compose Multiplatform enables seamless Google sign-in integration for both Android and iOS platforms. It simplifies the process of implementing Google authentication in apps built with Jetpack Compose and targets multiple platforms"
 extra["system"] = "GITHUB"
-extra["issueUrl"] = ""
+extra["issueUrl"] = "https://github.com/the-best-is-best/compose_sign_in_with_facebook/issues"
 extra["connectionGit"] = ".git"
 
-extra["developerName"] = ""
-extra["developerNameId"] = ""
-extra["developerEmail"] = ""
+extra["developerName"] = "Michelle Raouf"
+extra["developerNameId"] = "MichelleRaouf"
+extra["developerEmail"] = "eng.michelle.raouf@gmail.com"
 
 
 mavenPublishing {
@@ -63,7 +63,7 @@ mavenPublishing {
         extra["version"].toString()
     )
 
-    publishToMavenCentral(SonatypeHost.S01)
+    publishToMavenCentral(SonatypeHost.S01, true)
     signAllPublications()
 
     pom {
@@ -215,7 +215,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        minSdk = 23
+        minSdk = 21
         compileOptions {
             sourceCompatibility = JavaVersion.VERSION_17
             targetCompatibility = JavaVersion.VERSION_17
