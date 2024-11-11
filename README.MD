@@ -19,7 +19,7 @@
 
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.the-best-is-best/compose-facebook-sigin-in)](https://central.sonatype.com/artifact/io.github.the-best-is-best/compose-facebook-sigin-in)
 
-ComposeSignWithGoogle is available on `mavenCentral()`.
+ComposeSignWithFacebook is available on `mavenCentral()`.
 
 ```kotlin
 implementation("io.github.the-best-is-best:compose-facebook-sigin-in:1.0.0")
